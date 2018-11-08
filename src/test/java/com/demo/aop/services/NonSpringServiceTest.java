@@ -2,6 +2,7 @@ package com.demo.aop.services;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -11,6 +12,9 @@ import java.util.Properties;
 @SpringBootTest
 public class NonSpringServiceTest {
 
+    @Autowired
+    private SpringService springService;
+
     @Test
     public void name() {
         NonSpringService service = new NonSpringService();
@@ -18,4 +22,8 @@ public class NonSpringServiceTest {
 //        services.hello();
     }
 
+    @Test
+    public void anotherTest() {
+        springService.greetings(new Properties());
+    }
 }
