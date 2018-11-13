@@ -1,10 +1,9 @@
 package com.demo.aop.aspects;
 
-import org.aspectj.lang.JoinPoint;
+import com.demo.aop.models.SampleModel;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 
 import java.util.Properties;
 
@@ -26,12 +25,17 @@ public class ServiceAspect {
         return joinPoint.proceed(new Object[]{properties});
     }
 
-    @Before("execution(* com.demo.aop.services.NonSpringService.hello(..))")
-    public void logServiceAccess(JoinPoint joinPoint) {
-        System.out.println("in the before");
+    @Around("execution(* org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString(..)) && args(object)")
+    public Object reflectionToStringAccessAround(ProceedingJoinPoint joinPoint, Object object) throws Throwable {
+
         System.out.println("-------------------------");
+        System.out.println("Inside around [reflectionToStringAccessAround= " + object + "]");
         System.out.println("  Completed: " + joinPoint);
-        System.out.println("-------------------------");
+        System.out.println("-------------------------\n");
+
+        object = new SampleModel("New value injected");
+
+        return joinPoint.proceed(new Object[]{object});
     }
 
 }
