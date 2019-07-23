@@ -7,8 +7,8 @@ public class NonSpringService {
     public void hello(Properties properties){
         System.out.println("-------------------------");
         System.out.println("inside --- hello");
+        System.out.println(properties.getProperty("something"));
         System.out.println("-------------------------");
 
-        System.out.println(properties.getProperty("something"));
     }
 }

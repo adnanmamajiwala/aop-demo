@@ -13,9 +13,11 @@ public class ServiceAspect {
     @Around("execution(* com.demo.aop.services.NonSpringService.hello(..)) && args(properties)")
     public Object logServiceAccessAround(ProceedingJoinPoint joinPoint, Properties properties) throws Throwable {
 
-        System.out.println(properties.getProperty("something"));
-        properties = new Properties();
-        properties.setProperty("something", "from aspect");
+        System.out.println("properties.getProperty(\"something\") = " + properties.getProperty("something"));
+        System.out.println("Setting the value of property 'something' to 'this value was set from aspect'");
+//        properties = new Properties();
+        properties.setProperty("something", "this value was set from aspect");
+
 
         System.out.println("in the around");
         System.out.println("-------------------------");
